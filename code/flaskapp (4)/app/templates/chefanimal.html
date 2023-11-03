@@ -1,0 +1,190 @@
+{% extends "base.html" %}    
+{% block content %}
+
+<a href="/choix">Page Chef Animalier</a>
+
+<!-- ANIMAL -->
+<div class="container">
+    <div class="row">
+       <div class="col md=12">
+          <div class="jumbotron p-3">
+            <h2> <b>LIST ANIMAL</b> </h2>
+             <table class="table table-hover table-dark">
+                  <tr>
+                     <th class="table-success">code animal</th>
+                     <th class="table-success">espèce</th>
+                     <th class="table-success">famille</th>
+                     <th class="table-success">Num Zone</th>
+                     <th class="table-success">Num Enclos</th> 
+                     <th>
+                        <h2> 
+                              <button type="button"  class="btn btn-success float-right"
+                                 data-toggle="modal" data-target="#mymodal">Ajouter un nouveau animal
+                              </button> 
+                        </h2>
+                     </th>
+                  </tr>
+                {% for row in animal %}
+                   <tr>
+                      <td> {{ row.codeAnimal }} </td>
+                      <td> {{ row.espece }} </td>
+                      <td> {{ row.famille }} </td>
+                      <td> {{ row.NumZone }} </td>
+                      <td> {{ row.NumEnclo }} </td>
+                      
+                      <td class="table-success">
+                        <a href="/updateAnimal/{{row.codeAnimal}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.codeAnimal}}">Edit</a>
+                        <a href="/deleteAnimal/{{row.codeAnimal}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+                        <a href="/detailleAnimal/{{row.codeAnimal}}" class="btn btn-info btn-xs">Détaille</a>
+                      </td>
+                   </tr>
+                   <!-- Modal Modifier Animal-->
+                   <div id="modaledit{{row.codeAnimal}}" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+                         <div class="modal-content">
+                            <div class="modal-header">
+                            <h4 class="modal-title">Update Information</h4>
+                            </div>
+                            <div class="modal-body">
+                               <form action="{{url_for('updateAnimal', codeAnimal=row['codeAnimal']) }}" method="POST">
+                                  <div class="form-group">
+                                     <label>taille:</label>
+                                     <input type="hidden"  name="codeAnimal" value="{{row.codeAnimal}}">
+                                     <input type="number" step="0.01" class="form-control" name="taille" value="{{row.taille}}" required="1">
+                                  </div>
+                                  <div class="form-group">
+                                     <label>poids:</label>
+                                     <input type="number" step="0.01" class="form-control" name="poids" value="{{row.poids}}" required="1">
+                                  </div>
+                                  <div class="form-group">
+                                       <label>Origine:</label>
+                                       <input type="text" class="form-control" name="origine" value="{{row.origine}}">
+                                  </div>
+                                  <div class="form-group">
+                                       <label>Age:</label>
+                                       <input type="number" class="form-control" name="age" value="{{row.age}}">
+                                  </div>
+                                  <div class="form-group">
+                                        <label>Date de décès:</label>
+                                        <input type="date" class="form-control" name="DateDeses" value="{{row.DateDeses}}">
+                                  </div>
+                                  <div class="form-group">
+                                     <label>SignePart:</label>
+                                     <textarea class="form-control" name="SignePart" value="{{row.SignePart}}" cols="30" rows="5" required="1">{{row.SignePart}}</textarea>
+                                     <!-- <input type="text" class="form-control" name="SignePart" value="{{row.SignePart}}" required="1"> -->
+                                  </div>
+                                  <div class="form-group">
+                                     <label>NumZone:</label>
+                                     <input type="number" class="form-control" name="NumZone" value="{{row.NumZone}}" required="1">
+                                  </div>
+                                  <div class="form-group">
+                                     <label>NumEnclo:</label>
+                                     <input type="number" class="form-control" name="NumEnclo" value="{{row.NumEnclo}}" required="1">
+                                 </div>
+                                  <div class="form-group">
+                                  <button class="btn btn-primary" type="submit">Update</button>
+                                  </div>
+                               </form>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                {% endfor %}
+             </table>
+          </div>
+
+      
+
+          <!--Ajouter un ANIMAL-->
+       <div id="mymodal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title">Add Animal</h4>
+               </div>
+               <div class="modal-body">
+       
+                  <form action="{{url_for('chef')}}" method="POST">
+                     <div class="form-group">
+       
+                        <label>codeAnimal:</label>
+                        <input type="text" class="form-control" name="codeAnimal" required="1">
+ 
+                        <label>espece:</label>
+                        <input type="text" class="form-control" name="espece" required="1">
+ 
+                        <label>famille:</label>
+                        <input type="text" class="form-control" name="famille" required="1">
+ 
+                        <label>embranchement:</label>
+                        <input type="text" class="form-control" name="embranchement" required="1">
+ 
+                        <label>race:</label>
+                        <input type="text" class="form-control" name="race" required="1">
+
+                        <label>couleur:</label>
+                        <input type="text" class="form-control" name="couleur" required="1">
+ 
+                        <label>pelage:</label>
+                        <input type="text" class="form-control" name="pelage" required="1">
+ 
+                        <label>sexe:</label>
+                        <input type="text" class="form-control" name="sexe" required="1">
+ 
+                        <label>poids:</label>
+                        <input type="number" step="0.01" class="form-control" name="poids" required="1">
+ 
+                        <label>taille:</label>
+                        <input type="number" step="0.01" class="form-control" name="taille" required="1">
+
+                        <label>origine:</label>
+                        <input type="text" class="form-control" name="origine" required="1">
+
+                        <label>DateNais:</label>
+                        <input type="date" class="form-control" name="DateNais" required="1">
+
+                        <label>Age:</label>
+                        <input type="number" class="form-control" name="age" required="1">
+ 
+                        <label>DateDeses:</label>
+                        <input type="date" class="form-control" name="DateDeses">
+ 
+                        <label>SignePart:</label>
+                        <textarea class="form-control" name="SignePart" cols="30" rows="5" required="1"></textarea>
+ 
+                        <label>NumZone:</label>
+                        <input type="number" class="form-control" name="NumZone" required="1">
+ 
+                        <label>NumEnclo:</label>
+                        <input type="number" class="form-control" name="NumEnclo" required="1">
+ 
+                        <div class="form-group">
+                         <br>
+                         <button class="btn btn-primary" type="submit">Ajouter</button>
+                      </div>
+                     </form>
+                 </div>
+         
+         
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 </div>
+       
+       
+                     </div>
+                 </div>
+             </div>
+       </div>
+    </div>
+ </div>
+ </div>
+ </form>
+
+
+
+
+ 
+{% endblock %}

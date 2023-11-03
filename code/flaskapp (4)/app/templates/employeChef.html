@@ -1,0 +1,187 @@
+{% extends "base.html" %}    
+{% block content %}
+
+<a href="/choix">Page Chef Animalier</a>
+
+<!-- EMPLOYEE -->
+<div class="container">
+    <div class="row">
+       <div class="col md=12">
+          <div class="jumbotron p-3">
+             <h2> LIST EMPLOYE </b>  <button type="button"  class="btn btn-success float-right"
+                data-toggle="modal" data-target="#mymodal">Ajouter un nouveau employe</button> 
+             </h2>
+             <table class="table table-hover table-dark">
+                <tr>
+                   <th>matricule</th>
+                   <th>nom</th>
+                   <th>prenom</th>
+                   <th>adresse</th>
+                   <th> date naissance</th>
+                   <th> date de recrutement</th>
+                   <th> num piece identité</th>
+                   <th> num equipe</th>
+                   <th> structure</th>
+                   <th> num zone</th>
+                   
+                   
+                </tr>
+                {% for row in employ %}
+                   <tr>
+                      <td> {{ row.mat_emp }} </td>
+                      <td> {{ row.nom_emp }} </td>
+                      <td> {{ row.prenom_emp }} </td>
+                      <td> {{ row.adress_emp }} </td>
+                      <td> {{row.date_naissance}}</td>
+                      <td> {{row.date_recrutement}}</td>
+                      <td> {{row.num_pieceId}}</td>
+                      <td> {{row.num_equipe }}</td>
+                      <td> {{row.structure}}</td>
+                      <td> {{row.num_zone }}</td>
+                         
+                      <td>
+                         <a href="/updateEmp/{{row.mat_emp}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.mat_emp}}">Edit</a> </td>
+                       <td><a href="/deleteEmp/{{row.mat_emp}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+                      </td>
+                    </tr>
+                    <!-- Modal Modifier Employee-->
+                    <div id="modaledit{{row.mat_emp}}" class="modal fade" role="dialog">
+                       <div class="modal-dialog">
+                          <div class="modal-content">
+                             <div class="modal-header">
+                             <h4 class="modal-title">Update Information</h4>
+                             </div>
+                             <div class="modal-body">
+                                <form action="{{url_for('updateEmp', mat_emp=row['mat_emp']) }}" method="POST">
+                                   <div class="form-group">
+                                      <label>nom:</label>
+                                      <input type="hidden"  name="mat_emp" value="{{row.mat_emp}}">
+                                      <input type="text" class="form-control" name="nom_emp" value="{{row.nom_emp}}">
+                                   </div>
+                                   <div class="form-group">
+                                   <label>prenom:</label>
+                                   <input type="text" class="form-control" name="prenom_emp" value="{{row.prenom_emp}}">
+                                   </div>
+                                   <div class="form-group">
+                                      <label>adresse:</label>
+                                      <input type="text" class="form-control" name="adress_emp" value="{{row.adress_emp}}">
+                                   </div>
+                                    <div class="form-group">
+                                      <label>Date de naissance:</label>
+                                      <input type="text" class="form-control" name="datN" value="{{row.date_naissance}}">
+                                     </div>
+
+                                     <div class="form-group">
+                                        <label>Date de recrutement:</label>
+                                        <input type="text" class="form-control" name="datR" value="{{row.date_recrutement}}">
+                                       </div>
+                                       <div class="form-group">
+
+                                       <div class="form-group">
+                                          <label>num piece identité:</label>
+                                          <input type="number" class="form-control" name="numP" value="{{row.num_pieceId}}">
+                                       </div>
+
+                                        <label>num equipe:</label>
+                                        <input type="text" class="form-control" name="num_equipe" value="{{row.num_equipe}}">
+                                       </div>
+
+                                       <div class="form-group">
+                                          <label>structure:</label>
+                                          <input type="text" class="form-control" name="struct" value="{{row.structure}}">
+                                         </div>
+
+                                       <div class="form-group">
+                                        <label>num zone:</label>
+                                        <input type="text" class="form-control" name="num_zone" value="{{row.num_zone}}">
+                                       </div>
+                                
+                                   <div class="form-group">
+                                   <button class="btn btn-primary" type="submit">Update</button>
+                                   </div>
+                                </form>
+                             </div>
+                             <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                   {% endfor %}
+                </table>
+             </div>
+               <!--Ajouter un acteur-->
+      <div id="mymodal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+       
+                  <h4 class="modal-title">Add Employee</h4>
+               </div>
+               <div class="modal-body">
+       
+                  <form action="{{url_for('chefGererEmp')}}" method="POST">
+       
+       
+                     <div class="form-group">
+       
+                        <label>matricule:</label>
+                        <input type="text" class="form-control" name="mat_emp" required="1">
+ 
+                        <label>nom:</label>
+                        <input type="text" class="form-control" name="nom_emp" required="1">
+ 
+                        <label>prenom:</label>
+                        <input type="text" class="form-control" name="prenom_emp" required="1">
+ 
+                        <label>adress:</label>
+                        <input type="text" class="form-control" name="adresse_emp" required="1">
+ 
+                        <label>date de naissance:</label>
+                        <input type="date" class="form-control" name="datN" required="1">
+
+                        <label>date de recrutement:</label>
+                        <input type="Date" class="form-control" name="datR" required="1">
+
+                        <label>num piece identité:</label>
+                        <input type="number" class="form-control" name="numP" required="1">
+
+                        <label>num equipe:</label>
+                        <input type="number" class="form-control" name="numE" required="1">
+
+                        <label>structure:</label>
+                        <input type="text" class="form-control" name="struct" required="1">
+
+                        <label>num zone:</label>
+                        <input type="number" class="form-control" name="numZ" required="1">
+ 
+                       
+ 
+                        <div class="form-group">
+  
+                         <br>
+                         <button class="btn btn-primary" type="submit">Ajouter</button>
+        
+        
+                      </div>
+                     </form>
+  
+  
+                 </div>
+         
+         
+                 <div class="modal-footer">
+         
+         
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         
+         
+                 </div>
+            </div>
+        </div>
+  </div>
+
+<!-- </div> -->
+
+</form>
+{% endblock %}

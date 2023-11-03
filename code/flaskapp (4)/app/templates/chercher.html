@@ -1,0 +1,75 @@
+{% extends "base.html" %}    
+{% block content %}
+
+
+{% if animal %}
+<h1>Les informations de l'animal ({{ animal.codeAnimal }})</h1> <br><br>
+<table border="1">
+<tr>
+    <th>codeAnimal</th>
+    <th>espece</th>
+    <th>famille</th>
+    <th>embranchement</th>
+    <th>race</th>
+    <th>couleur</th>
+    <th>pelage</th>
+    <th>sexe</th>
+    <th>poids</th>
+    <th>taille</th>
+    <th>origine</th>
+    <th>DateNais</th>
+    <th>DateDeses</th>
+    <th>SignePart</th>
+    <th>NumZone</th>
+    <th>NumEnclo</th>
+    <th>Quantite de l'eau nécessaire</th>
+    <th>Quantite de nouriture nécessaire</th>
+    <th>Nature de nouriture nécessaire</th>
+    <th>Examen Générale</th>
+    <th>Ispection Repertoir Cardial</th>
+</tr>
+
+<tr>
+    <td> {{ animal.codeAnimal }} </td>
+    <td> {{ animal.espece }} </td> 
+    <td> {{ animal.famille }} </td>
+    <td> {{ animal.embranchement }} </td>
+    <td> {{ animal.race }} </td>
+    <td> {{ animal.couleur }} </td>
+    <td> {{ animal.pelage}} </td>
+    <td> {{ animal.sexe }} </td>
+    <td> {{ animal.poids }} </td>
+    <td> {{ animal.taille }} </td>
+    <td> {{ animal.origine }} </td>
+    <td> {{ animal.DateNais }} </td>
+    <td> {{ animal.DateDeses }} </td>
+    <td> {{ animal.SignePart }} </td>
+    <td> {{ animal.NumZone }} </td>
+    <td> {{ animal.NumEnclo}} </td>
+    <td> {{ animal.qteau}} </td>
+    <td> {{ animal.qtenouriture }} </td>
+    <td> {{ animal.natureNouri }} </td>
+    <td> {{ animal.examenGeneral }} </td>
+    <td> {{ animal.ispectionRepertoirCardial}} </td>
+</tr>
+
+</table>
+{% endif %}
+
+{% if employe %}
+<h1>Les informations de l'employe ({{ employe.mat_emp }})</h1> <br><br>
+
+<div class="card">
+    <h2>{{ employe.nom_emp }} {{ employe.prenom_emp }}</h2> <br>
+    <p>Le matricule: {{ employe.mat_emp }}</p>
+    <p>La date de naissance: {{ employe.date_naissance }}</p>
+    <p>L'adresse: {{ employe.adress_emp }}</p>
+    <p>La date de recrutement: {{ employe.date_recrutement }}</p>
+    <p>Num Pièce d'identité: {{ employe.num_pieceId }}</p>
+    <p>Num Equipe: {{ employe.num_equipe }}</p>
+    <p>Structure: {{ employe.structure }}</p>
+    <p>Num Zone: {{ employe.num_zone }}</p>
+</div>
+
+{% endif %}
+{% endblock %} 

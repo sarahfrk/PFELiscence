@@ -1,0 +1,10 @@
+Execution flask
+.\venv\Scripts\activate 
+
+
+flask run
+
+
+
+Execution angular
+ng serve -o

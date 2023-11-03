@@ -1,0 +1,39 @@
+{% extends "base.html" %}    
+{% block content %}
+<h1> chef animalier</h1>
+<br>
+<nav>
+    <ul>
+        <li>
+            <a href="/chef">Gérer Animal</a>
+        </li>
+    </ul>
+    <ul>
+        <li>
+            <a href="/chefGererEmp">Gérer Employés</a>
+        </li>
+        
+    </ul>
+</nav>
+
+<br><br>
+
+<form action="{{url_for('rechercheAnimal')}}" method="post" novalidate>
+    <div class="form-group">
+        <label>Entrer Le Code De L'animal Recherché :</label>
+        <input type="text" class="form-control" name="codeAnimal" placeholder="Code Animal" required="1"> <br>
+        <button type="submit" class="btn btn-outline-info" data-dismiss="modal">Chercher</button>
+     </div>
+</form>
+
+<form action="{{url_for('rechercheEmploye')}}" method="post" novalidate>
+    <div class="form-group">
+        <label>Entrer Le Code De L'employe Recherché :</label>
+        <input type="text" class="form-control" name="codeEmploye" placeholder="Code Employe" required="1"> <br>
+        <button type="submit" class="btn btn-outline-info" data-dismiss="modal">Chercher</button>
+     </div>
+</form>
+
+
+
+{% endblock %}

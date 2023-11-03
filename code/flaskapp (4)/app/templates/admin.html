@@ -1,0 +1,163 @@
+{% extends "base.html" %}    
+{% block title %} Admin {% endblock %} 
+{% block content %}
+<a href="/directeur">Page Directeur</a>
+<h1> adminstartion</h1>
+
+
+<div class="container">
+   <div class="row">
+      <div class="col md=12">
+         <div class="jumbotron p-3">
+            <h2> LIST ACTEURS </b>  <button type="button"  class="btn btn-success float-right"
+               data-toggle="modal" data-target="#mymodal">Ajouter un nouveau acteur</button> 
+            </h2>
+            <table class="table table-hover table-dark">
+               <tr>
+                  <th>matricule</th>
+                  <th>nom</th>
+                  <th>prenom</th>
+                  <th>adresse</th>
+                  <th> tel</th>
+                  <th>role</th>
+               </tr>
+               {% for row in acteur %}
+                  <tr>
+                     <td> {{ row.matricule }} </td>
+                     <td> {{ row.nom }} </td>
+                     <td> {{ row.prenom }} </td>
+                     <td> {{ row.adresse }} </td>
+                     <td> {{ row.tel }} </td>
+                     <td> {{ row.role }} </td>  
+                     
+                     <td>
+                        <a href="/updateActeur/{{row.matricule}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.matricule}}">Edit</a>
+                        <a href="/deleteActeur/{{row.matricule}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+                     </td>
+                  </tr>
+                  <!-- Modal Modifier Employee-->
+                  <div id="modaledit{{row.matricule}}" class="modal fade" role="dialog">
+                     <div class="modal-dialog">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                           <h4 class="modal-title">Update Information</h4>
+                           </div>
+                           <div class="modal-body">
+                              <form action="{{url_for('updateActeur', matricule=row['matricule']) }}" method="POST">
+                                 <div class="form-group">
+                                    <label>nom:</label>
+                                    <input type="hidden"  name="matricule" value="{{row.matricule}}">
+                                    <input type="text" class="form-control" name="name" value="{{row.nom}}">
+                                 </div>
+                                 <div class="form-group">
+                                 <label>prenom:</label>
+                                 <input type="text" class="form-control" name="prenom" value="{{row.prenom}}">
+                                 </div>
+                                 <div class="form-group">
+                                    <label>adresse:</label>
+                                    <input type="text" class="form-control" name="adresse" value="{{row.adresse}}">
+                                 </div>
+                                 <div class="form-group">
+                                    <label>Tel:</label>
+                                    <input type="text" class="form-control" name="tel" value="{{row.tel}}">
+                                 </div>
+                                 <div class="form-group">
+                                    <label>role:</label>
+                                    <!-- <input type="text" class="form-control" name="role" required="1"> -->
+                                    <select name="role"   class="form-control" value="{{row.role}}">
+                                       <option value="{{row.role}}">{{row.role}}</option> 
+                                       <option value="directeur">directeur</option>
+                                      <option value="secrétaire">secrétaire</option>
+                                       <option value="vétérinaire">vétérinaire</option>
+                                       <option value="soigneur animalier">soigneur animalier</option>
+                                       <option value="chef animalier">chef animalier</option>
+                                     </select>
+                                 </div>
+                                 <div class="form-group">
+                                 <button class="btn btn-primary" type="submit">Update</button>
+                                 </div>
+                              </form>
+                           </div>
+                           <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               {% endfor %}
+            </table>
+         </div>
+      
+      <!--Ajouter un acteur-->
+      <div id="mymodal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <div class="modal-header">
+      
+                 <h4 class="modal-title">Add Employee</h4>
+              </div>
+              <div class="modal-body">
+      
+                 <form action="{{url_for('admin')}}" method="POST">
+      
+      
+                    <div class="form-group">
+      
+                       <label>matricule:</label>
+                       <input type="text" class="form-control" name="matricule" required="1">
+
+                       <label>nom:</label>
+                       <input type="text" class="form-control" name="nom" required="1">
+
+                       <label>prenom:</label>
+                       <input type="text" class="form-control" name="prenom" required="1">
+
+                       <label>adress:</label>
+                       <input type="text" class="form-control" name="adresse" required="1">
+
+                       <label>Tel:</label>
+                       <input type="number" class="form-control" name="tel" required="1">
+
+                       <label>role:</label>
+                       <!-- <input type="text" class="form-control" name="role" required="1"> -->
+                       <select name="role" class="form-control">
+                        <option value="directeur">directeur</option>
+                        <option value="secrétaire">secrétaire</option>
+                        <option value="vétérinaire">vétérinaire</option>
+                        <option value="soigneur animalier">soigneur animalier</option>
+                        <option value="chef animalier">chef animalier</option>
+                      </select>
+
+                       <div class="form-group">
+ 
+                        <br>
+                        <button class="btn btn-primary" type="submit">Ajouter</button>
+       
+       
+                     </div>
+                    </form>
+ 
+ 
+                </div>
+        
+        
+                <div class="modal-footer">
+        
+        
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+        
+                </div>
+      
+      
+                    </div>
+                </div>
+            </div>
+      </div>
+   </div>
+</div>
+</div>
+
+</form>
+ {% endblock %}
+    

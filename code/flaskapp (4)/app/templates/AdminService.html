@@ -1,0 +1,189 @@
+{% extends "base.html" %}    
+{% block content %}
+
+<a href="/directeur">Page Directeur</a>
+
+<!-- service -->
+<div class="container">
+    <div class="row">
+       <div class="col md=12">
+          <div class="jumbotron p-3">
+            <h2> <b>LIST Service</b> </h2>
+             <table class="table table-hover table-dark">
+                  <tr>
+                     <th >num service</th>
+                     <th >nom service</th>
+                     <th>nombre zone </th>
+                     <th>description</th>
+                    
+                     <th> adresse </th>
+                     <th>
+                        <h2> 
+                              <button type="button"  class="btn btn-success float-right"
+                                 data-toggle="modal" data-target="#mymodal">Ajouter un nouveau service
+                              </button> 
+
+                        </h2>
+                     </th>
+                  </tr>
+                {% for row in service %}
+                   <tr>
+                      <td> {{ row.numService }} </td>
+                      <td> {{ row.nomService }} </td>
+                      <td> {{ row.nbrZone }} </td>
+
+                      <td> {{ row.description }} </td>
+                      <td> {{ row.adresse }} </td>
+                      
+                      <td >
+                        <a href="/updateService/{{row.numService}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.numService}}">Edit</a>
+                        <a href="/deleteService/{{row.numService}}" class="btn btn-danger btn-xs" onclick=" return confirm('Are You Sure To Delete ?')">Delete</a>
+                          
+                      </td>
+                   </tr>
+
+                   <!--  Model de liste de zone -->
+                   
+                   <!--Ajouter un service-->
+         <div id="mymodalZone{{row.numService}}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                 <div class="modal-header">
+         
+                    <h4 class="modal-title">liste</h4>
+                   </div>
+                   <div class="modal-body">
+         
+                    <form >
+         
+         
+                       <div class="form-group">
+                        
+                            <label>  {{row.listZone}}
+                            </label>
+                             
+                          </div>
+                          </form>
+                          </div>
+                          </div>
+                          </div>
+                          </div>
+
+                   <!-- Modal Modifier Service-->
+                   <div id="modaledit{{row.numService}}" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+                         <div class="modal-content">
+                            <div class="modal-header">
+                            <h4 class="modal-title">Update Service</h4>
+                            </div>
+                            <div class="modal-body">
+                               <form action="{{url_for('updateService', numService=row['numService']) }}" method="POST">
+                                  <div class="form-group">
+                                     <label>Nom service:</label>
+                                     <input type="hidden"  name="numService" value="{{row.numService}}">
+                                     <input type="text" step="0.01" class="form-control" name="nomService" value="{{row.nomService}}" required="1">
+                                  </div>
+                                  <div class="form-group">
+                                     <label>nombre de zone:</label>
+                                     <input type="number" step="0.01" class="form-control" name="nbrZone" value="{{row.nbrZone}}" required="1">
+                                  </div>
+                                  <div class="form-group">
+                                       <label>description:</label>
+                                       <textarea class="form-control" name="description" value="{{row.description}}" cols="30" rows="5" required="1">{{row.description}}</textarea>
+                                  </div>
+                              
+                                  <div class="form-group">
+                                     <label>adresse:</label>
+                                     
+                                     <input type="text" class="form-control" name="adresse" value="{{row.adresse}}" required="1"> 
+                                  </div>
+
+                                
+                                  <div class="form-group">
+                                  <button class="btn btn-primary" type="submit">Update</button>
+                                  </div>
+                               </form>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                {% endfor %}
+             </table>
+          </div>
+
+
+                   <!--Ajouter un service-->
+         <div id="mymodal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+           <div class="modal-content">
+              <div class="modal-header">
+      
+                 <h4 class="modal-title">Add Service</h4>
+                </div>
+                <div class="modal-body">
+      
+                 <form action="{{url_for('AdminService')}}" method="POST">
+      
+      
+                    <div class="form-group">
+      
+                       <label>numService:</label>
+                       <input type="number" class="form-control" name="numService" required="1">
+
+                       <label>nom service:</label>
+                       <input type="text" class="form-control" name="nomService" required="1">
+
+                       <label>nbr zone:</label>
+                       <input type="nember" class="form-control" name="nbrZone" required="1">
+
+                     
+                        <label>description:</label>
+                        <textarea class="form-control" name="description" cols="30" rows="5" required="1"></textarea>
+        
+
+                       <label>adress:</label>
+                       <input type="text" class="form-control" name="adresse" required="1">
+
+                      
+
+                       <div class="form-group">
+ 
+                        <br>
+                        <button class="btn btn-primary" type="submit">Ajouter</button>
+       
+       
+                     </div>
+                    </form>
+ 
+ 
+                </div>
+        
+        
+                <div class="modal-footer">
+        
+        
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+        
+                </div>
+         
+
+          </div>
+          </div>
+          </div>
+       </div>
+    </div>
+</div>
+
+
+
+        </form>
+
+
+
+
+ 
+        {% endblock %}

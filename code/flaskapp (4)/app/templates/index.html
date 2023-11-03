@@ -1,0 +1,24 @@
+{% extends "base.html" %}   
+{% block title %} Home {% endblock %}  
+{% block content %} 
+    <p> page home</p>
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>username</th>
+            <th>email</th>
+            <th>password_hash</th>
+            <th>posts</th>
+        </tr>
+        {% for row in employees %}
+        <tr>
+            <td> {{ row.id }} </td>
+            <td> {{ row.username }} </td>
+            <td> {{ row.email }} </td>
+            <td> {{ row.password_hash }} </td>
+            <td> {{ row.posts }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}  
+    

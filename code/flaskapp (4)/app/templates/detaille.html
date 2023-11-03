@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %} Login {% endblock %} 
+{% block content %}
+<h1>Detaille</h1>
+
+
+<div class="table-responsive">
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th class="table-secondary">CodeAnimal</th>
+                <th class="table-secondary">Espece</th>
+                <th class="table-secondary">Famille</th>
+                <th class="table-secondary">Embranchement</th>
+                <th class="table-secondary">Race</th>
+                <th class="table-secondary">Couleur</th>
+                <th class="table-secondary">Pelage</th>
+                <th class="table-secondary">Sexe</th>
+                <th class="table-secondary">Poids</th>
+                <th class="table-secondary">Taille</th>
+                <th class="table-secondary">Origine</th>
+                <th class="table-secondary">DateNais</th>
+                <th class="table-secondary">Age</th>
+                <th class="table-secondary">DateDeses</th>
+                <th class="table-secondary">SignePart</th>
+                <th class="table-secondary">NumZone</th>
+                <th class="table-secondary">NumEnclo</th>
+                <th class="table-secondary">Quantité de l'eau nécessaire</th>
+                <th class="table-secondary">Quantité de nouriture nécessaire</th>
+                <th class="table-secondary">Nature de nouriture nécessaire</th>
+                <th class="table-secondary">Examen generale</th>
+                <th class="table-secondary">Ispection Repertoir Cardial</th>
+           </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="table-primary"> {{ dataAnimal.codeAnimal }} </th>
+                <td class="table-primary"> {{ dataAnimal.espece }} </td>
+                <td class="table-primary"> {{ dataAnimal.famille }} </td>
+                <td class="table-primary"> {{ dataAnimal.embranchement }} </td>
+                <td class="table-primary"> {{ dataAnimal.race }} </td>
+                <td class="table-primary"> {{ dataAnimal.couleur }} </td>
+                <td class="table-primary"> {{ dataAnimal.pelage }} </td>
+                <td class="table-primary"> {{ dataAnimal.sexe }} </td>
+                <td class="table-primary"> {{ dataAnimal.poids }} </td>
+                <td class="table-primary"> {{ dataAnimal.taille }} </td>
+                <td class="table-primary"> {{ dataAnimal.origine }} </td>
+                <td class="table-primary"> {{ dataAnimal.DateNais }} </td>
+                <td class="table-primary"> {{ dataAnimal.age }} </td>
+                <td class="table-primary"> {{ dataAnimal.DateDeses }} </td>
+                <td class="table-primary"> {{ dataAnimal.SignePart }} </td>
+                <td class="table-primary"> {{ dataAnimal.NumZone }} </td>
+                <td class="table-primary"> {{ dataAnimal.NumEnclo }} </td>
+                <td class="table-primary"> {{ dataAnimal2.qteau }} </td>
+                <td class="table-primary"> {{ dataAnimal2.qtenouriture }} </td>
+                <td class="table-primary"> {{ dataAnimal2.natureNouri }} </td>
+                <td class="table-primary"> {{ dataAnimal2.examenGeneral }} </td>
+                <td class="table-primary"> {{ dataAnimal2.ispectionRepertoirCardial }} </td>
+            </tr>
+        </tbody>
+        
+    </table> 
+</div>
+       
+
+{% endblock %}

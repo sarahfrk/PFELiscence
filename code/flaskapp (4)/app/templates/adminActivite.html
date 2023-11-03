@@ -1,0 +1,117 @@
+{% extends "base.html" %}    
+{% block content %}
+
+<a href="/directeur">Page Directeur</a>
+
+<!-- activite -->
+<div class="container">
+    <div class="row">
+       <div class="col md=12">
+          <div class="jumbotron p-3">
+            <h2> <b>LIST activité</b> </h2>
+             <table class="table table-hover table-dark">
+                  <tr>
+                     <th >num activité</th>
+                     <th >nom d activite</th>
+                     <th>date d activite</th>
+                     <th>information</th>
+                    
+            
+                     <th>
+                        <h2> 
+                              <button type="button"  class="btn btn-success float-right"
+                                 data-toggle="modal" data-target="#mymodal">Ajouter un nouvelle activité
+                              </button> 
+
+                        </h2>
+                     </th>
+                  </tr>
+                {% for row in actv %}
+                   <tr>
+                      <td> {{ row.numActivite}} </td>
+                      <td> {{ row.nomActivite}} </td>
+                      <td> {{ row.dateActivite }} 
+
+                      <td> {{ row.information }} </td>
+                   
+                      
+                      <td >
+         
+                        <a href="/deleteActivite/{{row.numActivite}}" class="btn btn-danger btn-xs" onclick=" return confirm('Are You Sure To Delete ?')">Delete</a>
+                          
+                      </td>
+                   </tr>
+                   {% endfor %}
+                </table>
+                  
+                   
+                
+                   
+
+                   <!--Ajouter un activite-->
+         <div id="mymodal" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+           <div class="modal-content">
+              <div class="modal-header">
+      
+                 <h4 class="modal-title">Add activite</h4>
+                </div>
+                <div class="modal-body">
+      
+                 <form action="{{url_for('adminActivite')}}" method="POST">
+      
+      
+                    <div class="form-group">
+      
+                       <label>num Activite:</label>
+                       <input type="number" class="form-control" name="numActivite" required="1">
+
+                       <label>nom activite:</label>
+                       <input type="text" class="form-control" name="nomActivite" required="1">
+
+                       <label>date activite:</label>
+                       <input type="date" class="form-control" name="dateActivite" required="1">
+
+                     
+                        <label>information:</label>
+                        <textarea class="form-control" name="information" cols="30" rows="5" required="1"></textarea>
+          
+
+                       <div class="form-group">
+ 
+                        <br>
+                        <button class="btn btn-primary" type="submit">Ajouter</button>
+       
+       
+                     </div>
+                    </form>
+ 
+ 
+                </div>
+        
+        
+                <div class="modal-footer">
+        
+        
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+        
+                </div>
+         
+
+          </div>
+          </div>
+          </div>
+
+
+           
+          </div>
+       </div>
+    </div></div>
+    
+
+
+
+
+ 
+        {% endblock %}

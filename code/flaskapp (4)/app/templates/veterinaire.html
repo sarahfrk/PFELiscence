@@ -1,0 +1,73 @@
+{% extends "base.html" %}    
+{% block content %}
+<p> veterinaire</p>
+
+<table border="1">
+   <tr>
+       <th>CodeAnimal</th>
+       <th>Quantité de l'eau nécessaire</th>
+       <th>Quantité de nouriture nécessaire</th>
+       <th>Nature de nuriture nécessaire</th>
+       <th>Examen generale</th>
+       <th>Ispection Repertoir Cardial</th>
+   </tr>
+   {% for row in veter %}
+   <tr>
+       <td> {{ row.animal_codeAnimal }} </td>
+       <td> {{ row.qteau }} </td>
+       <td> {{ row.qtenouriture }} </td>
+       <td> {{ row.natureNouri }} </td>
+       <td> {{ row.examenGeneral }} </td>
+       <td> {{ row.ispectionRepertoirCardial }} </td>
+       <td> 
+           <a href="/veterinaireUpdate/{{row.animal_codeAnimal}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.animal_codeAnimal}}">Edit</a> 
+           <a href="/detailleAnimal/{{row.animal_codeAnimal}}" class="btn btn-info btn-xs">Détaille</a>
+       </td>
+
+
+        <div id="modaledit{{row.animal_codeAnimal}}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title">Update Information</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{url_for('veterinaireUpdate', animal_codeAnimal=row['animal_codeAnimal']) }}" method="POST">
+                        <div class="form-group">
+                        <label>Quantité de l'eau nécessaire:</label>
+                        <input type="hidden"  name="animal_codeAnimal" value="{{row.animal_codeAnimal}}">
+                        <input type="number" step="0.01" class="form-control" name="qteau" value="{{row.qteau}}" required="1">
+                        </div>
+                        <div class="form-group">
+                        <label>Quantité de nouriture nécessaire:</label>
+                        <input type="number" step="0.01" class="form-control" name="qtenouriture" value="{{row.qtenouriture}}" required="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Nature de nouriture nécessaire:</label>
+                            <input type="text" class="form-control" name="natureNouri" value="{{row.natureNouri}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Examen generale:</label>
+                            <input type="text" class="form-control" name="examenGeneral" value="{{row.examenGeneral}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Ispection Repertoir Cardial:</label>
+                            <input type="text" class="form-control" name="ispectionRepertoirCardial" value="{{row.ispectionRepertoirCardial}}">
+                        </div>
+                       
+                        <div class="form-group">
+                           <button class="btn btn-primary" type="submit">Update</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>  
+   </tr>
+   {% endfor %}
+</table>
+
+{% endblock %}
